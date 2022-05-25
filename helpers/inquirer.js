@@ -1,4 +1,5 @@
 
+const { blue } = require('colors');
 const inquirer = require('inquirer');
 require('colors');
 
@@ -11,38 +12,38 @@ const preguntas = [
         choices: [
             {
                 value: '1',
-                name: '1. Crear Tarea'
+                name: `${'1.'.blue} ${'Crear Tarea'.white}`
             },
             {
                 value: '2',
-                name: '2. Listar Tarea'
+                name: `${'2.'.blue} ${'Listar Tarea'.white}`
             },
             {
                 value: '3',
-                name: '3. Listar Tareas Completadas'
+                name:  `${'3.'.blue} ${'Listar Tareas Completadas'.white}`
             },
             {
                 value: '4',
-                name: '4. Listar Tareas Pendientes'
+                name:  `${'4.'.blue} ${'Listar Tareas Pendientes'.white}`
             },
             {
                 value: '5',
-                name: '1. Completar Tareas'
+                name: `${'5.'.blue} ${'Completar Tareas'.white}`
             },
             {
                 value: '6',
-                name: '6. Borrar Tareas'
+                name:  `${'6.'.blue} ${'Borrar Tareas'.white}`
             },
             {
                 value: '0',
-                name: '0. Salir'
+                name: `${'0.'.blue} ${'Salir'.white}`
             },
         ]
     }
 ];
 
 
-const inquerirMenu = async() => {
+const inquirerMenu = async() => {
 
     // Inicio
     // console.clear();
@@ -72,18 +73,28 @@ const inquerirMenu = async() => {
 
     }
 
-    const leerInput = async( mensaje ) => {
+    const leerInput = async( message ) => {
         
         const question = [
             {
                 type: 'input',
-                name: 'desc'
+                name: 'desc',
+                message,
+                validate( value ){
+                    if(value.length === 0){
+                        return 'Por favor ingrese un valor';
+                    }
+                    return true;
+                }
             }
-        ]
+        ];
+
+        const { desc } = await inquirer.prompt(question);
+        return desc;
     }
 
-
 module.exports = {
-    inquerirMenu,
-    pause
+    inquirerMenu,
+    pause,
+    leerInput
 }
