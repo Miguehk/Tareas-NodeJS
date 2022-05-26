@@ -45,7 +45,7 @@ class Tareas{
             const estado = ( completadoEn )
                                 ? 'Completada'.green
                                 : 'Pendiente'.red;
-            console.log(`${ idx } ${ desc } :: ${ estado }`);
+
         });
     }
 
